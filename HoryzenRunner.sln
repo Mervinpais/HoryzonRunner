@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakOs_Emulator", "FakOs_Emulator\FakOs_Emulator.csproj", "{8A73E330-5D5B-4F22-B410-0BEBAB0046E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoryzenRunner", "HoryzenRunner\HoryzenRunner.csproj", "{8A73E330-5D5B-4F22-B410-0BEBAB0046E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +15,10 @@ Global
 		{8A73E330-5D5B-4F22-B410-0BEBAB0046E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A73E330-5D5B-4F22-B410-0BEBAB0046E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A73E330-5D5B-4F22-B410-0BEBAB0046E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FBCD3C3-211B-4B57-BAE5-C210916994D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FBCD3C3-211B-4B57-BAE5-C210916994D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FBCD3C3-211B-4B57-BAE5-C210916994D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FBCD3C3-211B-4B57-BAE5-C210916994D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

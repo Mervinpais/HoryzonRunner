@@ -1,0 +1,18 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HoryzenRunnerGUI.MainWindow"
+        Title="HoryzenRunnerGUI">
+    <StackPanel Margin="20">
+    <TextBlock Margin="0 5" >HoryzenRunner App path</TextBlock>
+    <TextBox Name="osPathRunner"  Watermark="OS File app"/>
+    <TextBlock Margin="0 5" >File path:</TextBlock>
+    <TextBox Name="osPathTB"  Watermark="OS File path"/>
+    <Button Name="osPathBrowseBTN" HorizontalAlignment="Center">Browse files</Button>
+    <Button Name="runBTN" HorizontalAlignment="Center">Run OS</Button>
+    <TextBox Name="outputTB" Height="200" AcceptsReturn="True" TextWrapping="Wrap"
+    Background="#000020"/>
+    </StackPanel>
+</Window>
