@@ -40,7 +40,7 @@ namespace HoryzenRunner
             CurrentOS_Directory = Path.Join(OS_dirs, OS_name, Path.GetFileNameWithoutExtension(VHD)); // for the ".zip"
 
         GetFiles:
-            Console.WriteLine("\n" + CurrentOS_Directory +"\n");
+            Console.WriteLine("\n" + CurrentOS_Directory + "\n");
             // Console.WriteLine(Directory.Exists(CurrentOS_Directory)+"\n");
             if (!Directory.Exists(CurrentOS_Directory)) //check if a directory exists or has files
             {
@@ -62,13 +62,15 @@ namespace HoryzenRunner
             // Parse code into a SyntaxTree
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(Path.Join(CurrentOS_Directory, "Boot.img.cs")));
 
+            var netCoreDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
             var references = new MetadataReference[]
             {
+                MetadataReference.CreateFromFile(Path.Combine(netCoreDir, "System.Private.CoreLib.dll")),
+                MetadataReference.CreateFromFile(Path.Combine(netCoreDir, "System.Runtime.dll")),
+                MetadataReference.CreateFromFile(Path.Combine(netCoreDir, "System.Console.dll")),
+                MetadataReference.CreateFromFile(Path.Combine(netCoreDir, "System.IO.FileSystem.dll")),
                 MetadataReference.CreateFromFile(Assembly.GetExecutingAssembly().Location),
-                MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(File).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-                //MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
             };
 
 
@@ -91,8 +93,22 @@ namespace HoryzenRunner
                     }
                     throw new Exception("Dynamic compilation failed.");
                 }
-            }
 
+                var assembly = Assembly.Load(ms.ToArray());
+                var myClassType = assembly.GetType("Program");
+                if (myClassType == null)
+                {
+                    Console.WriteLine("Program class not found in the compiled assembly.");
+                    return;
+                }
+                var greetMethod = myClassType.GetMethod("Main");
+                if (greetMethod == null)
+                {
+                    Console.WriteLine("Main method not found.");
+                    return;
+                }
+                greetMethod.Invoke(null, null);
+            }
             /*
                 Generally, the OS should have files that are;
                 - boot.img.cs

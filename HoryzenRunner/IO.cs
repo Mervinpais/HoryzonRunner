@@ -11,9 +11,9 @@ namespace HoryzenRunner
             if (!Directory.Exists(osDir)) throw new Exception("OS Dir not initialised - KERNEL PANIC");
         }
 
-        public static void Write(object value, string filepath)
+        public static void Write(string? value, string filepath)
         {
-            throw new Exception("FS: "+ filepath);
+            File.WriteAllText(filepath, value);
         }
     }
 }
