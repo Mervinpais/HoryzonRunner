@@ -32,7 +32,7 @@
 
             if (!File.Exists(args[0]))
             {
-                throw new FileNotFoundException($"Hey dude that file you pointed to doesnt really exist :/ FILENAME: {args[0]}");
+                throw new FileNotFoundException($"ERROR: VHD Not found, FILENAME: {args[0]}");
             }
 
             VHD = args[0];

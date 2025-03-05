@@ -15,5 +15,17 @@ namespace HoryzenRunner
         {
             File.WriteAllText(filepath, value);
         }
+        public static void Writeln(string? value, string filepath)
+        {
+            Write(Environment.NewLine + value, filepath);
+        }
+        public static void Append(string? value, string filepath)
+        {
+            File.AppendAllText(filepath, value);
+        }
+        public static void Appendln(string? value, string filepath)
+        {
+            File.AppendAllText(filepath, Environment.NewLine + value);
+        }
     }
 }

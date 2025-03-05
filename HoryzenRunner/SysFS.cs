@@ -1,10 +1,5 @@
-using System;
-using System.Runtime;
 using System.IO.Compression;
-using System.Reflection;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Threading;
 
 namespace HoryzenRunner
 {
@@ -59,61 +54,7 @@ namespace HoryzenRunner
             // The OS folder can be found at Path.Join(OS_dirs, OS_name)
 
             //After init we passover to boot.cs
-            // Parse code into a SyntaxTree
-            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(Path.Join(CurrentOS_Directory, "Boot.img.cs")));
-
-            var netCoreDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
-            var references = new MetadataReference[]
-            {
-                MetadataReference.CreateFromFile(Path.Combine(netCoreDir, "System.Private.CoreLib.dll")),
-                MetadataReference.CreateFromFile(Path.Combine(netCoreDir, "System.Runtime.dll")),
-                MetadataReference.CreateFromFile(Path.Combine(netCoreDir, "System.Console.dll")),
-                MetadataReference.CreateFromFile(Path.Combine(netCoreDir, "System.IO.FileSystem.dll")),
-                MetadataReference.CreateFromFile(Assembly.GetExecutingAssembly().Location),
-                MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-            };
-
-
-
-            CSharpCompilation compilation = CSharpCompilation.Create(
-                "DynamicAssembly",
-                new[] { syntaxTree },
-                references,
-                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
-
-            using (var ms = new MemoryStream())
-            {
-                var result = compilation.Emit(ms);
-                if (!result.Success)
-                {
-                    Console.WriteLine("Compilation failed. Errors:");
-                    foreach (var diagnostic in result.Diagnostics)
-                    {
-                        Console.WriteLine(diagnostic);
-                    }
-                    throw new Exception("Dynamic compilation failed.");
-                }
-
-                var assembly = Assembly.Load(ms.ToArray());
-                var myClassType = assembly.GetType("Program");
-                if (myClassType == null)
-                {
-                    Console.WriteLine("Program class not found in the compiled assembly.");
-                    return;
-                }
-                var greetMethod = myClassType.GetMethod("Main");
-                if (greetMethod == null)
-                {
-                    Console.WriteLine("Main method not found.");
-                    return;
-                }
-                greetMethod.Invoke(null, null);
-            }
-            /*
-                Generally, the OS should have files that are;
-                - boot.img.cs
-                - boot.resources (or .resx idgaf)
-             */
+            return;
         }
     }
 }
